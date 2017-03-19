@@ -24,3 +24,23 @@ Administration:
 ==============
 
 Edit your meta data inline on your FlatPage and Site models.
+
+Migrations & Initial Data
+===============
+```
+./manage.py migrate flatpage_meta
+./manage.py loaddata ../.ve/lib/python2.7/site-packages/flatpage_meta/fixtures/initial_data.json
+```
+
+Add Admin
+==========
+```
+from flatpage_meta.admin import ReplacementFlatPageAdmin
+
+class FlatPageAdmin(ReplacementFlatPageAdmin):
+	pass
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)
+```
+
