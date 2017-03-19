@@ -1,24 +1,46 @@
-The app modifies your admin pages for Site and FlatPage to add inlines
-for meta tags.
+This is a quick upgrade for any site using Django FlatPages.
 
 Installation
 ============
 
-Add "flatpage_meta" to your INSTALLED_APPS
+Add flatpage_meta to your INSTALLED_APPS, run syncdb
 
-Usage
-=====
 
-Add the following to the HEAD of your flatpage template:
+Use:
+===
 
-    {% load flatpage_meta_tags %}{% flatpage_meta_tags flatpage %}
+Put this into your FlatPage template:
 
-or the following to your site template:
+    {% load flatpage_meta_tags %}
+    {% flatpage_meta_tags flatpage %}
+    
+and/or this into into your site's base template.
 
-    {% load flatpage_meta_tags %}{% flatpage_meta_tags %}
+    {% load flatpage_meta_tags %}
+    {% flatpage_meta_tags %}
 
-Notes
-=====
-Some tags can be included more than once - OpenGraph arrays for instance.
-These have the "allow_multiple" flag set on the tag. Otherwise we raise
-a ValidationError to stop editors from making a mess.
+
+Administration:
+==============
+
+Edit your meta data inline on your FlatPage and Site models.
+
+Migrations & Initial Data
+===============
+```
+./manage.py migrate flatpage_meta
+./manage.py loaddata $(PATH_TO_LIB)/flatpage_meta/fixtures/initial_data.json
+```
+
+Add Admin
+==========
+```
+from flatpage_meta.admin import ReplacementFlatPageAdmin
+
+class FlatPageAdmin(ReplacementFlatPageAdmin):
+	pass
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)
+```
+
