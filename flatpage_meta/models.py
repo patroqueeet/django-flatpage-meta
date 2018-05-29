@@ -20,7 +20,7 @@ class CommonMetaTag(models.Model):
         MetaTagType,
         related_name="%(app_label)s_%(class)s_related"
     )
-    content = models.CharField(max_length=150)
+    content = models.TextField(max_length=350)
 
     class Meta:
         verbose_name = "Meta tag"
