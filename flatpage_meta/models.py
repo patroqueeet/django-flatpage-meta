@@ -18,6 +18,7 @@ class MetaTagType(models.Model):
 class CommonMetaTag(models.Model):
     meta_tag_type = models.ForeignKey(
         MetaTagType,
+        on_delete=models.CASCADE,
         related_name="%(app_label)s_%(class)s_related"
     )
     content = models.TextField(max_length=350)
@@ -31,7 +32,7 @@ class CommonMetaTag(models.Model):
 
 
 class FlatPageMetaTag(CommonMetaTag):
-    flatpage = models.ForeignKey(FlatPage, related_name="meta_tag_set")
+    flatpage = models.ForeignKey(FlatPage, on_delete=models.CASCADE, related_name="meta_tag_set")
 
     def clean(self):
         if not self.meta_tag_type.allow_multiple:
@@ -40,7 +41,7 @@ class FlatPageMetaTag(CommonMetaTag):
 
 
 class SiteMetaTag(CommonMetaTag):
-    site = models.ForeignKey(Site, related_name="meta_tag_set")
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name="meta_tag_set")
 
     def clean(self):
         if not self.meta_tag_type.allow_multiple:
