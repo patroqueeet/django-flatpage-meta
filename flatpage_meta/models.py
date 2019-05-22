@@ -27,7 +27,7 @@ class CommonMetaTag(models.Model):
         verbose_name = "Meta tag"
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.meta_tag_type.format_string.format(content=self.content)
 
 
