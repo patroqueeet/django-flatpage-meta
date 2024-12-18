@@ -1,5 +1,7 @@
 name: test
 on: [pull_request, push] # activates the workflow when there is a push or pull request in the repo
+env:
+  DJANGO_SETTINGS_MODULE: flatpage_meta.settings
 jobs:
   test:
     runs-on: ubuntu-latest # operating system your code will run on
