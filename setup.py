@@ -18,10 +18,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=["Django"],
-    extras_require={
-        "dev": [
-            "pytest",
-            "model_bakery",
-        ]
-    },
+    extras_require={"dev": ["pytest", "model_bakery", "pytest-django"]},
 )
