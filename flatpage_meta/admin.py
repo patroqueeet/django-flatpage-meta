@@ -1,15 +1,15 @@
-from django.contrib import admin
-from django.contrib.flatpages.models import FlatPage
-from django.contrib.sites.models import Site
-from django.contrib.flatpages.admin import FlatPageAdmin as OldFlatPageAdmin
-from django.contrib.sites.admin import SiteAdmin as OldSiteAdmin
 from django.conf import settings
+from django.contrib import admin
+from django.contrib.flatpages.admin import FlatPageAdmin as OldFlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
+from django.contrib.sites.admin import SiteAdmin as OldSiteAdmin
+from django.contrib.sites.models import Site
 
-from flatpage_meta.models import MetaTagType, FlatPageMetaTag, SiteMetaTag
+from flatpage_meta.models import FlatPageMetaTag, MetaTagType, SiteMetaTag
 
 
 class MetaTagTypeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'format_string', 'allow_multiple')
+    list_display = ("name", "description", "format_string", "allow_multiple")
 
 
 class FlatPageMetaTagInline(admin.TabularInline):
@@ -21,12 +21,17 @@ class ReplacementFlatPageAdmin(OldFlatPageAdmin):
         if "tinymce" in settings.INSTALLED_APPS:
             from django import forms
             from tinymce.widgets import TinyMCE
-            if db_field.name == 'content':
-                return forms.CharField(widget=TinyMCE(
-                    attrs={'cols': 80, 'rows': 30},
-                    mce_attrs={},
-                ))
-        return super(ReplacementFlatPageAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+
+            if db_field.name == "content":
+                return forms.CharField(
+                    widget=TinyMCE(
+                        attrs={"cols": 80, "rows": 30},
+                        mce_attrs={},
+                    )
+                )
+        return super(ReplacementFlatPageAdmin, self).formfield_for_dbfield(
+            db_field, **kwargs
+        )
 
     inlines = [FlatPageMetaTagInline]
 

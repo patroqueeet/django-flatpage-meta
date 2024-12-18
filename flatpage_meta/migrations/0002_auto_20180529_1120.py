@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('flatpage_meta', '0001_initial'),
+        ("flatpage_meta", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='flatpagemetatag',
-            name='content',
+            model_name="flatpagemetatag",
+            name="content",
             field=models.TextField(max_length=350),
         ),
         migrations.AlterField(
-            model_name='sitemetatag',
-            name='content',
+            model_name="sitemetatag",
+            name="content",
             field=models.TextField(max_length=350),
         ),
     ]
