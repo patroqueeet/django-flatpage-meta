@@ -1,5 +1,6 @@
 import pytest
-from django.tests import TestCase
+from django.core.exceptions import ValidationError
+from django.test import TestCase
 from model_bakery import baker
 
 
